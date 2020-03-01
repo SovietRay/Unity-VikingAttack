@@ -18,7 +18,6 @@ public class Spawner : MonoBehaviour
         SetWave(_waveCount);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_currentWave == null)

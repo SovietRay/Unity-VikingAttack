@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Vector3 _direction;
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private Player _target;
     [SerializeField] private Animator _animator;
     [SerializeField] private Health _health;
     [SerializeField] private int _damageFromParticle;
     [SerializeField] private float speed;
+
+    private Vector3 _direction;
 
     private void Update()
     {
