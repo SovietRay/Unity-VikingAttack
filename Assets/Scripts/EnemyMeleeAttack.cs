@@ -7,11 +7,11 @@ public class EnemyMeleeAttack : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform _attackPoint;
     [SerializeField] private float _attackRange;
+    [SerializeField] private float _reloadTime = 0.7f;
     [SerializeField] private int _damage;
     [SerializeField] private LayerMask _attackMask;
 
     private bool _canHit = true;
-    private float _reloadTime = 0.7f;
 
     void Update()
     {
