@@ -151,7 +151,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.20405471, y: -0.023014545}
+  m_Offset: {x: -0.25794172, y: -0.023014545}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -162,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2403648, y: 1.3206377}
+  m_Size: {x: 0.9170432, y: 1.3206377}
   m_EdgeRadius: 0
 --- !u!114 &1504080728
 MonoBehaviour:
@@ -176,10 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50869fb179cac00448e15fe26e9db733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 75
-  _currentHealth: 75
-  _coinPrefab: {fileID: 7392504893749401580, guid: aaa3b7ed512fbcd4b96b99dd117e3878,
-    type: 3}
+  _health: 100
+  _currentHealth: 100
 --- !u!114 &1504080732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +193,6 @@ MonoBehaviour:
   _animator: {fileID: 5859652269314206831}
   _attackPoint: {fileID: 5961610810306860347}
   _attackRange: 0.8
-  _reloadTime: 0.7
   _damage: 10
   _attackMask:
     serializedVersion: 2
@@ -230,7 +227,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
