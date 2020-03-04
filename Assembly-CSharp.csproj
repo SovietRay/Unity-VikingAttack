@@ -67,6 +67,7 @@
     <Compile Include="Assets\LazyShortcuts\LazyShortcutsEditor.cs" />
     <Compile Include="Assets\Scripts\Coin.cs" />
     <Compile Include="Assets\Scripts\CollisionDamage.cs" />
+    <Compile Include="Assets\Scripts\DogPatrol.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\EnemyMeleeAttack.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
