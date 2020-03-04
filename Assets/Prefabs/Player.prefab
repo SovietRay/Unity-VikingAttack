@@ -105,7 +105,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -4828,8 +4828,6 @@ GameObject:
   - component: {fileID: 1875144545}
   - component: {fileID: 1875144542}
   - component: {fileID: 1190150133}
-  - component: {fileID: 1190150140}
-  - component: {fileID: 1190150141}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -4933,7 +4931,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 7
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4955,7 +4953,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.15939713, y: -0.23569345}
+  m_Offset: {x: 0.01414156, y: -0.23569345}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4966,7 +4964,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0550852, y: 0.863008}
+  m_Size: {x: 0.6273148, y: 0.863008}
   m_EdgeRadius: 0
 --- !u!114 &1875144545
 MonoBehaviour:
@@ -4981,7 +4979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3
-  _jumpForce: 25
+  _jumpForce: 0.3
   _shotgun: {fileID: 7229833449542841471}
   _animator: {fileID: 7760062018506603164}
   _rigidbody: {fileID: 1875144543}
@@ -4998,8 +4996,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50869fb179cac00448e15fe26e9db733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 200
-  _currentHealth: 150
+  _health: 100
+  _currentHealth: 100
 --- !u!114 &1190150133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5012,43 +5010,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eac69253985429468f682c2590f3e9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isGrounded: 0
---- !u!61 &1190150140
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7760062018506603167}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.012607574, y: -0.6723919}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.50080013, y: 0.055339813}
-  m_EdgeRadius: 0
---- !u!114 &1190150141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7760062018506603167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0186df07b0b0674dae85ad2e116e4eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _coinCount: 0
