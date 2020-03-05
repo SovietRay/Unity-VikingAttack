@@ -194,12 +194,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5859652269314206831}
   _attackPoint: {fileID: 5961610810306860347}
-  _attackRange: 0.8
   _reloadTime: 0.7
   _damage: 10
   _attackMask:
     serializedVersion: 2
     m_Bits: 256
+  _attackRange: 0.8
 --- !u!114 &1504080730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,10 +214,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 5718454443034927637}
   _target: {fileID: 1875144545, guid: 6aa921ad9e39dc541bf74bb0878cad9b, type: 3}
-  _animator: {fileID: 5859652269314206831}
   _health: {fileID: 1504080728}
   _damageFromParticle: 2
-  speed: 2
+  _speed: 2
 --- !u!50 &5718454443034927637
 Rigidbody2D:
   serializedVersion: 4
