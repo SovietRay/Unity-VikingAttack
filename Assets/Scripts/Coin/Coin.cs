@@ -9,11 +9,6 @@ public class Coin : MonoBehaviour
 
     private bool _used = false;
 
-    private void Start()
-    {
-        GameManager.Instance.coinContainer.Add(gameObject, this);
-    }
-
     public int ReturnCostAndDestroy()
     {
         if (!_used)
@@ -27,7 +22,6 @@ public class Coin : MonoBehaviour
     }
     private void EndDestroy()
     {
-        GameManager.Instance.coinContainer.Remove(gameObject);
         Destroy(transform.parent.gameObject);
     }
 }

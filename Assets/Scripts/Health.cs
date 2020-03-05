@@ -13,10 +13,7 @@ public class Health : MonoBehaviour
         if (_maxHealth < _currentHealth)
             _maxHealth = _currentHealth;
     }
-    private void Start()
-    {
-        GameManager.Instance.healthContainer.Add(gameObject, this);
-    }
+
     public float CurrentHealth
     {
         get { return _currentHealth; }
