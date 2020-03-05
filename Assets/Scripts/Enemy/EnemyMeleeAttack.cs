@@ -24,10 +24,10 @@ public class EnemyMeleeAttack : MonoBehaviour
         Collider2D[] hitObject = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _attackMask);
         foreach (Collider2D obj in hitObject)
         {
-            if (GameManager.Instance.healthContainer.ContainsKey(obj.gameObject))
+            if (obj.gameObject.TryGetComponent<Health>(out var healthTemp))
             {
                 _animator.SetTrigger("Attack");
-                GameManager.Instance.healthContainer[obj.gameObject].TakeDamage(_damage);
+                healthTemp.TakeDamage(_damage);
                 _canHit = false;
                 yield return new WaitForSeconds(_reloadTime);
                 _canHit = true;

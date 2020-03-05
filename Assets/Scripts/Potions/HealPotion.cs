@@ -11,9 +11,9 @@ public class HealPotion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player _) && GameManager.Instance.healthContainer.ContainsKey(collision.gameObject) && !_used)
+        if (collision.TryGetComponent(out Player _) && collision.TryGetComponent<Health>(out var healthTemp) && !_used)
         {
-            GameManager.Instance.healthContainer[collision.gameObject].AddHealth(_hpAmount);
+            healthTemp.AddHealth(_hpAmount);
             Destroy();
         }
     }

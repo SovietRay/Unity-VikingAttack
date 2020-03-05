@@ -8,7 +8,7 @@ public class CollisionDamage : MonoBehaviour
 
     public void SetDamage(GameObject other)
     {
-        if (GameManager.Instance.healthContainer.ContainsKey(other))
-            GameManager.Instance.healthContainer[other].TakeDamage(_damage);
+        if (other.TryGetComponent<Health>(out var healthTemp))
+            healthTemp.TakeDamage(_damage);
     }
 }

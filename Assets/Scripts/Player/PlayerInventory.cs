@@ -13,9 +13,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GameManager.Instance.coinContainer.ContainsKey(collision.gameObject))
-        {
-            AddCoin(GameManager.Instance.coinContainer[collision.gameObject].ReturnCostAndDestroy());
-        }
+        if (collision.TryGetComponent<Coin>(out var coinTemp))
+            AddCoin(coinTemp.ReturnCostAndDestroy());
     }
 }
