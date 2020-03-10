@@ -1,33 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class EnemyMeleeAttack : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
     [SerializeField] private Transform _attackPoint;
     [SerializeField] private float _reloadTime = 0.7f;
     [SerializeField] private int _damage;
     [SerializeField] private LayerMask _attackMask;
     [SerializeField] private float _attackRange;
+
+    private Animator _animator;
+    private bool _canHit = true;
+
     public float AttackRange => _attackRange;
 
-    private bool _canHit = true;
+    private void OnEnable()
+    {
+        if (_attackPoint == null)
+        {
+            enabled = false;
+            throw new InvalidOperationException(_attackPoint.name);
+        }
+    }
+
+    private void Start()
+    {
+        TryGetComponent(out _animator);
+    }
 
     void Update()
     {
         if (_canHit)
             StartCoroutine(Attack());
     }
+
     private IEnumerator Attack()
     {
         Collider2D[] hitObject = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _attackMask);
         foreach (Collider2D obj in hitObject)
         {
-            if (obj.gameObject.TryGetComponent<Health>(out var healthTemp))
+            if (obj.gameObject.TryGetComponent<Health>(out var health))
             {
                 _animator.SetTrigger("Attack");
-                healthTemp.TakeDamage(_damage);
+                health.TakeDamage(_damage);
                 _canHit = false;
                 yield return new WaitForSeconds(_reloadTime);
                 _canHit = true;
@@ -35,6 +52,7 @@ public class EnemyMeleeAttack : MonoBehaviour
         }
         yield return null;
     }
+
     private void OnDrawGizmosSelected()
     {
         if (_attackPoint == null)

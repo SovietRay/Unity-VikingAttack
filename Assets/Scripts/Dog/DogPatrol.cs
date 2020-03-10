@@ -1,17 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 [RequireComponent(typeof(GroundDetection))]
-
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class DogPatrol : MonoBehaviour
 {
     [SerializeField] Transform _rightBorder;
     [SerializeField] Transform _leftBorder;
     [SerializeField] float _speed;
-    [SerializeField] private Rigidbody2D _rigitbady;
-    [SerializeField] private Animator _animator;
 
+    private Rigidbody2D _rigidbady;
+    private Animator _animator;
     private GroundDetection _groundDetection;
     private bool _isRightDirection;
     private Vector3 _direction;
@@ -22,9 +22,25 @@ public class DogPatrol : MonoBehaviour
             _speed = 0;
     }
 
+    private void OnEnable()
+    {
+        if (_rightBorder == null)
+        {
+            enabled = false;
+            throw new InvalidOperationException(_rightBorder.name);
+        }
+        if (_leftBorder == null)
+        {
+            enabled = false;
+            throw new InvalidOperationException(_leftBorder.name);
+        }
+    }
+
     private void Start()
     {
-        _groundDetection = GetComponent<GroundDetection>();
+        TryGetComponent(out _groundDetection);
+        TryGetComponent(out _animator);
+        TryGetComponent(out _rigidbady);
     }
 
     private void Update()
@@ -41,10 +57,11 @@ public class DogPatrol : MonoBehaviour
             SetMovingVector();
             _animator.SetFloat("Speed", Mathf.Abs(_direction.x));
         }
-        _direction.y = _rigitbady.velocity.y;
-        _rigitbady.velocity = _direction;
+        _direction.y = _rigidbady.velocity.y;
+        _rigidbady.velocity = _direction;
         SetSpriteDirection();
     }
+
     private void SetIsRightDirectionInBorders()
     {
         if (transform.position.x > _rightBorder.position.x)
@@ -52,11 +69,13 @@ public class DogPatrol : MonoBehaviour
         if (transform.position.x < _leftBorder.position.x)
             _isRightDirection = true;
     }
+
     private void SetMovingVector()
     {
         _direction = _isRightDirection ? Vector3.right : Vector3.left;
         _direction *= _speed;
     }
+
     private void SetSpriteDirection()
     {
         if (_direction.x > 0)
