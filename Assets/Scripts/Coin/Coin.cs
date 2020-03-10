@@ -1,20 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof (Animator))]
 public class Coin : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private int _cost = 1;
 
-    private bool _used = false;
+    private void Start()
+    {
+        TryGetComponent(out _animator);
+    }
 
     public int ReturnCostAndDestroy()
     {
-        if (!_used)
+        if (gameObject.TryGetComponent<CircleCollider2D>(out var collider2D))
         {
             _animator.SetTrigger("StartDestroy");
-            _used = true;
+            collider2D.enabled = false;
             return _cost;
         }
         else

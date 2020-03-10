@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CollisionDamage : MonoBehaviour
 {
     [SerializeField] private int _damage;
 
-    public void SetDamage(GameObject other)
+    public void ApplyDamage(GameObject other)
     {
-        if (other.TryGetComponent<Health>(out var healthTemp))
-            healthTemp.TakeDamage(_damage);
+        if (other.TryGetComponent<Health>(out var health))
+            health.TakeDamage(_damage);
     }
 }

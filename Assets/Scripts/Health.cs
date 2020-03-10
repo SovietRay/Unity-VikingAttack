@@ -1,12 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+
+    public float CurrentHealth => _currentHealth;
+
     [SerializeField] private int _maxHealth;
     [SerializeField] private int _currentHealth;
-    [SerializeField] private GameObject _coinPrefab;
+    [SerializeField] private UnityEvent _deadEvent;
 
     private void OnValidate()
     {
@@ -14,19 +16,12 @@ public class Health : MonoBehaviour
             _maxHealth = _currentHealth;
     }
 
-    public float CurrentHealth
-    {
-        get { return _currentHealth; }
-    }
     public void TakeDamage(int damage)
     {
         _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
-        //Debug.Log($"My name - {gameObject.name}, i take {damage} damage! My current health {_currentHealth} from {_health}.");
         if (_currentHealth <= 0)
         {
-            if (_coinPrefab != null)
-                Instantiate(_coinPrefab, this.transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            _deadEvent.Invoke();
         }
     }
 
@@ -34,6 +29,5 @@ public class Health : MonoBehaviour
     {
         if (health >= 0)
             _currentHealth = Mathf.Clamp(_currentHealth + health, 0, _maxHealth);
-        //Debug.Log($"My name - {gameObject.name}, i take {health} health! My current health {_currentHealth} from {_health}.");
     }
 }

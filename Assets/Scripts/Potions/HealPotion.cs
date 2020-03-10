@@ -1,17 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof (Animator))]
 public class HealPotion : MonoBehaviour
 {
-    [SerializeField] int _hpAmount;
-    [SerializeField] private Animator _animator;
+    [SerializeField] private int _hpAmount;
+    
+    private Animator _animator;
 
-    private bool _used = false;
+    private void Start()
+    {
+        TryGetComponent(out _animator);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player _) && collision.TryGetComponent<Health>(out var healthTemp) && !_used)
+        collision.TryGetComponent<BoxCollider2D>(out var collider2D);
+        if (collision.TryGetComponent(out Player _) && collision.TryGetComponent<Health>(out var healthTemp) && collider2D.enabled)
         {
             healthTemp.AddHealth(_hpAmount);
             Destroy();
@@ -21,7 +25,8 @@ public class HealPotion : MonoBehaviour
     public void Destroy()
     {
         _animator.SetTrigger("StartDestroy");
-        _used = true;
+        if (TryGetComponent<BoxCollider2D>(out var collider2D))
+            collider2D.enabled = false;
     }
 
     private void EndDestroy()

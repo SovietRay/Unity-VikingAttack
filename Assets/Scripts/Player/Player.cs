@@ -1,24 +1,37 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(GroundDetection))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
-    [SerializeField] private ParticleSystem _shotgun;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _reloadTime;
+    [SerializeField] private ParticleSystem _shotgun;
 
-    private Vector3 _direction; //Save player move direction
+    private Vector3 _movingDirection;
     private GroundDetection _groundDetection;
+    private Animator _animator;
+    private Rigidbody2D _rigidbody;
     private bool _canShoot = true;
+
+    private void OnEnable()
+    {
+        if (_shotgun == null)
+        {
+            enabled = false;
+            throw new InvalidOperationException(_shotgun.name);
+        }
+    }
 
     private void Start()
     {
-        _groundDetection = GetComponent<GroundDetection>();
+        TryGetComponent(out _groundDetection);
+        TryGetComponent(out _animator);
+        TryGetComponent(out _rigidbody);
     }
 
     void Update()
@@ -39,16 +52,17 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(_reloadTime);
         _canShoot = true;
     }
+
     private void Movement()
     {
-        _direction = Vector3.zero;
+        _movingDirection = Vector3.zero;
         if (Input.GetKey(KeyCode.A))
-            _direction = Vector3.left;
+            _movingDirection = Vector3.left;
         if (Input.GetKey(KeyCode.D))
-            _direction = Vector3.right;
-        _direction *= _speed;
-        _direction.y = _rigidbody.velocity.y;
-        _rigidbody.velocity = _direction;
+            _movingDirection = Vector3.right;
+        _movingDirection *= _speed;
+        _movingDirection.y = _rigidbody.velocity.y;
+        _rigidbody.velocity = _movingDirection;
 
         if (Input.GetKey(KeyCode.Space) && _groundDetection.IsGrounded) //Add normal to surface test
         {
